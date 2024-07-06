@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Fourteen</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="src/logowhite.png">
+    <script src="https://kit.fontawesome.com/da41431bf6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="guide">
+        <button id="guide-CloseButton" onclick="closeGuide()">&times;</button>
+        <div id="guide-Content">
+            <label for="guide-WarmUp">Warm-Up</label>
+            <p id="guide-WarmUp" class="guide-Item" style="text-align: justify;">(~5-10 min)<br><br>The goal here is to
+                start a conversation and have a sort of ice
+                breaker, making the student comfortable with the ideas that will follow in the Vocabulary and Input.
+                <br><br> Remember that all the questions in the Warm-Up section are meant for the student to bring
+                personal ideas to the class, to be later related to the content just learned. <br><br> Also, take a look
+                at the Vocabulary beforehand and make sure to show how important the content of this Lesson is in the
+                real world. For example: we are constantly greeting people, therefore knowing how to greet a stranger in
+                English is a must since day one.
+            </p>
+            <label for="guide-Vocabulary">Vocabulary</label>
+            <p id="guide-Vocabulary" class="guide-Item" style="text-align: justify;">(~10 min)<br><br>Present the new
+                vocabulary to your student in a dynamic way. Make sure to say the words out loud and have your student
+                repeat them. <br><br>Also, have a moment where only the student says the vocabulary and use it to correct
+                possible mispronunciations. </p>
+            <label for="guide-Input">Input</label>
+            <p id="guide-Input" class="guide-Item">(~20 min)<br><br>See “Grammar Documentation” in the Documents area
+                of your dashboard for Lesson Plans prepared by the Horizon Group.
+            </p>
+            <label for="guide-Practice">Practice</label>
+            <p id="guide-Practice" class="guide-Item" style="text-align: justify;">(~20 min)<br><br>This is the Conversation part of your class. Make sure to make
+                your student speak as much English as possible, considering the content just seen. Help with
+                structurally wrong sentences by repeating the same information in the correct structure. Make sure to
+                ask if your student has any remaining questions regarding the Lesson.
+            </p>
+
+        </div>
+    </div>
+    <header>
+        <div id="headericons">
+            <a href="#" id="home" onclick="window.location.href = '../../dashboard.html'"><i class="fa-solid fa-house"></i> Home</a>
+            <a id="dictionary" href="#" onclick="window.open('https://dictionary.cambridge.org/', '_blank')"><i class="fa-solid fa-spell-check"></i> Dictionary</a>
+            <a href="#" id="logout" onclick="window.location.href = '/../index.html'"><i class="fa-solid fa-right-from-bracket"></i> Log Out</a>
+        </div>
+        <div id="teacher-guide" onclick="openGuide()"><i class="fa-solid fa-wand-magic-sparkles"></i> Guide</div>
+        <!--<audio id="audiocontrol" controls controlsList="nodownload noplaybackrate" style="display: none;">
+            <source src="HTG-CL2.mp3" type="audio/mp3">
+        </audio>-->
+    </header>
+    <aside>
+        <h3>Money and Shopping</h3>
+        <div id="container">
+            <a href="#" id="WarmUpLink" class="classitem" onclick="changeContent('WarmUp', this); callframe();"><i class="fa-solid fa-fire"></i></a>
+            <a href="#" id="VocabLink" class="classitem" onclick="changeContent('Vocabulary', this); killframe();"><i class="fa-solid fa-spell-check"></i></a>
+            <a href="#" id="InputOneLink" class="classitem" onclick="changeContent('InputOne', this); callframe();"><i class="fa-solid fa-circle-plus"></i></a>
+            <a href="#" id="InputTwoLink" class="classitem" onclick="changeContent('InputTwo', this); callframe();"><i class="fa-solid fa-circle-plus"></i></a>
+            <a href="#" id="PracticeLink" class="classitem" onclick="changeContent('Practice', this); callframe();"><i class="fa-solid fa-pen"></i></a>
+        </div>
+    </aside>
+    <main>
+        <div id="mainframe"></div>
+        <div id="classWarmUp" class="classContent" style="display: none;">
+            <div class="warmupitem">
+                <h3>O que você lembra da Lesson Thirteen?</h3>
+            </div>
+            <div class="warmupitem">
+                <h3>Você é bem organizado com dinheiro?</h3>
+            </div>
+        </div>
+        <div id="classVocabulary" class="classContent" style="display: none;">
+            <div id="vocabgrid" class="vocabtop">
+                <div id="vocab1">
+                </div>
+                <div id="vocab2" class="vocabtop">
+                </div>
+                <div class="vocab3">
+                    <div id="vocab3col1" class="vocab3col">
+                    </div>
+                    <div id="vocab3col2" class="vocab3col">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="classInputOne" class="classContent" style="display: none;">
+            <div id="inp1container">
+                <div class="inputoneitem" id="inputoneitem1"> 
+                    <h2><i class="fa-solid fa-circle-plus"></i> | More on money vocabulary</h2>
+                    <h4 style="text-align: center;">to Take a loan</h4>
+                    
+                    <p>I <strong style="color: #9e2a2b;">took a loan</strong> to buy my car.</p>
+                    <p style="margin-bottom: 32px;">She <strong style="color: #9e2a2b;">took a student loan</strong>.</p>
+                    
+                    <h4 style="text-align: center;">Down payment & installments</h4>
+                    <p>She paid a $50.000,00<strong style="color: #9e2a2b;"> down payment</strong> on her new house.</p>
+                    <p>She pays $1.000,00 a month <strong style="color: #9e2a2b;">in installments</strong>.</p>
+                </div>
+                <div class="inputoneitem" id="inputoneitem2">
+                </div>
+            </div>
+        </div>
+        <div id="classInputTwo" class="classContent" style="display: none;">
+            <h2><i class="fa-solid fa-circle-plus"></i> | Tag Questions</h2>
+            <p style="text-align: center;">Tag questitons are always used according to the subject and verb of the sentence:</p>
+            <br>
+            <hr>
+            
+            <div id="tobe">
+                <div id="one">
+                    <p style="margin-bottom: 32px;">He was a doctor, <strong style="color: #9e2a2b;">wasn't he?</strong></p>
+                    <p style="margin-bottom: 32px;">She was talking to him, <strong style="color: #9e2a2b;">wasn't she?</strong></p>
+                    <p style="margin-bottom: 32px;">she bought a new car, <strong style="color: #9e2a2b;">didn't she?</strong></p>
+                    <p style="margin-bottom: 32px;">He didn't buy that house, <strong style="color: #9e2a2b;">did he?</strong></p>
+
+                </div>
+                <div id="two">
+                    
+                    <p style="margin-bottom: 32px;">Joanna liked that dress, <strong style="color: #9e2a2b;">didn't she?</strong></p>
+                    <p style="margin-bottom: 32px;">He traveled to the US, <strong style="color: #9e2a2b;">didn't he?</strong></p>
+                    <p style="margin-bottom: 32px;">Bob spent a lot of money, <strong style="color: #9e2a2b;">didn't he?</strong></p>
+                    <p style="margin-bottom: 32px;">You can play guitar, <strong style="color: #9e2a2b;">can't you?</strong></p>                 
+
+                </div>
+            </div>
+        </div>
+        <div id="classPractice" class="classContent" style="display: none;">
+            <div id="actonecontainer">
+                <div id="actone">
+                    <h3>Conversation Questions</h3>
+                    <h4>Answer the questions below:</h4>
+                    
+                    <div>
+                        <p>What is the best thing you <strong>ever</strong> bought?</p>
+                        <p>Do you like to go shopping?</p>
+                        <p>Are you organized with your money?</p>
+                        <p>Do you prefer to buy in installments or save money to buy later?</p>
+                        <p>Do you spend a lot of money when you go shopping?</p>
+                    </div>
+                </div>
+                <div id="actimg"></div>
+            </div>
+            
+
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
