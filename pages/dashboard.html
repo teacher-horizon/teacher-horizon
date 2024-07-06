@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Horizon</title>
+    <script type="module" src="src/studentstable.js" defer></script>
+    <script type="module" src="src/records.js" defer></script>
+    <script type="module" src="src/newstudent.js" defer></script>
+    <script type="module" src="src/attendance.js" defer></script>
+    <script src="src/sorttable.js"></script>
+    <link rel="stylesheet" href="src/styles.css">
+    <!--<link rel="stylesheet" href="src/teacherhomepagestyles.css">-->
+    <link rel="icon" type="image/png" href="src/logowhite.png">
+    <script src="https://kit.fontawesome.com/da41431bf6.js" crossorigin="anonymous"></script>
+</head>
+<body onload="setDefault()">
+    <aside>
+        <img id="asideLogo" src="src/accesslogo.png" alt="Horizon">
+        <div id="teacherDash">
+            <p>Teacher's Dashboard</p>
+        </div>
+        <div id="buttonsContainer">
+            <a href="#" id="sbButton-Students" class="sidebarButton" onclick="changeContent('Students')"><i
+                    class="fa-solid fa-user-graduate"></i>&nbsp;&nbsp;Students</a>
+            <a href="#" id="sbButton-NewLesson" class="sidebarButton" onclick="changeContent('NewLesson')" style="display: none;"><i
+                    class="fa-solid fa-folder-plus"></i>&nbsp;&nbsp;New Lesson</a>
+            <a href="#" id="sbButton-ClassRecords" class="sidebarButton" onclick="changeContent('ClassRecords')"><i
+                    class="fa-regular fa-folder-open"></i>&nbsp;&nbsp;Class Records</a>
+            <a href="#" id="sbButton-Lessons" class="sidebarButton" onclick="changeContent('Lessons')"><i
+                    class="fa-solid fa-spell-check"></i>&nbsp;&nbsp;Lessons</a>
+            <a href="#" id="sbButton-Practice" class="sidebarButton" onclick="changeContent('Practice')"><i
+                    class="fa-solid fa-square-pen"></i>&nbsp;&nbsp;Practice</a>
+            <a href="#" id="sbButton-Documents" class="sidebarButton" onclick="changeContent('Documents')"><i
+                    class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;Documents</a>
+        </div>
+    </aside>
+    <main>
+        <div id="studentDetails">
+            <h4>Student Profile</h4>
+            <button id="closeDetails" onclick="closePopup()">&times;</button>
+            <label for="Details-Name">Student's Name</label>
+            <div id="Details-Name" class="Details-PopUp"></div>
+            <label for="Details-Email">Student's Email</label>
+            <div id="Details-Email" class="Details-PopUp"></div>
+            <label for="Details-Module">Student's Module</label>
+            <div id="Details-Module" class="Details-PopUp"></div>
+            <label for="Details-linkCall">Zoom / Meet link</label>
+            <div id="Details-linkCall" class="Details-PopUp"></div>
+            <div id="Detail-Numbers">
+                <label for="Details-Price">Hour Price</label>
+                <div id="Details-Price" class="Details-PopUp"></div>
+                <label for="Details-HoursTotal">Monthly Classes</label>
+                <div id="Details-HoursTotal" class="Details-PopUp"></div>
+            </div>
+        </div>
+        <div id="studentRecordDetails">
+            <h4>New Lesson</h4>
+            <button id="closeRecordDetails" onclick="closeNewRecordPopup()">&times;</button>
+            <label for="RecordDetails-Name">Student's Name</label>
+            <div id="RecordDetails-Name" class="Details-PopUp"></div>
+            <div id="RecordDetails-DateArea">
+                <p>Date:</p>
+                <input type="date" id="RecordDetails-Date"></input>
+            </div>
+            <label for="RecordDetails-Lesson">Given Lesson</label>
+            <input type="text" id="RecordDetails-Lesson" class="Details-PopUp"></input>
+            <label for="RecordDetails-Notes">Teacher's Notes</label>
+            <input type="text" name="" id="RecordDetails-Notes" class="Details-PopUp"></input>
+            <button id="RecordDetails-SaveButton">Save</button>
+        </div>
+        <div id="mainContent-Students" class="mainContent" style="display: none;">
+            <div id="itemStudentsContainer">
+                <div id="studentsHeader">
+                    <h3>Students Table</h3>
+                    <div id="studentsButtons">
+                        <button id="reloadButton" class="studentButton" onclick="populateStudentsTable()"><i
+                                class="fa-solid fa-rotate"></i> &nbsp; Update</button>
+                        <button id="myBtn" class="studentButton"><i class="fa-solid fa-person-circle-plus"></i> &nbspNew
+                            Student</button>
+                    </div>
+                </div>
+                <div>
+                    <table id="studentsTable" class="sortable">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable(0)" class = "StudentTable-Info">Name</th>
+                                <th class = "StudentTable-Info">Module</th>
+                                <th style="display: none;">Email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent-ClassRecords" class="mainContent" style="display: none;">
+            <div class="stdHeader">
+                <h3 class="itemTitle">Class Records</h3>
+                <input type="text" id="searchInput" placeholder="Search for a student...">
+                <!-- Month filter -->
+                <select id="monthFilter">
+                    <option value="">All Months</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
+                    <option value="05">May</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                    <!-- Add more options for each month -->
+                </select>
+            </div>
+            <div id="itemRecordsContainer">
+                <div>
+                    <table id="recordsTable" class=”sortable”>
+                        <thead>
+                            <tr>
+                                <th class="recordsTH" id="recordsStudentName">Name</th>
+                                <th class="recordsTH">Lesson</th>
+                                <th class="recordsTH" id="recordsDate">Date</th>
+                                <th class="recordsTH">Notes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Table body content will be populated dynamically -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent-Lessons" class="mainContent" style="display: none;">
+            <div id="modules">
+                <div class="LessonsOption" id="LessonsOptionA1A2" onclick="openA1A2()">
+                    <h4>A1A2 MODULE</h4>
+                </div>
+                <div class="LessonsOption" id="LessonsOptionB1">
+                    <h4>B1 MODULE</h4>
+                    <p>Coming Soon...</p>
+                </div>
+                <div class="LessonsOption" id="LessonsOptionB2">
+                    <h4>B2 MODULE</h4>
+                    <p>Coming Soon...</p>
+                </div>
+            </div>
+            <div class="grid" id="A1A2list" style="display: none;">
+                <div id="A1A2Header">
+                    <button id="A1A2goBack" onclick="gobacktoModules()"><i class="fa-solid fa-angles-left"></i></button>
+                    <h3>A1A2 Module</h3>
+                </div>
+                <div id="A1A2LessonContainer">
+                    <h3 class="titleunit">Unit One</h3>
+                    <div class="unit">
+                        <div class="lessonU1" onclick="window.location.href = 'Lessons/1_LessonOne/lessonOne.html'">
+
+                            <div class="lesson-title">Lesson 1</div>
+                            <div class="lesson-description">Welcome!</div>
+                        </div>
+                        <div class="lessonU1" onclick="window.location.href = 'Lessons/2_LessonTwo/lessonTwo.html'">
+
+                            <div class="lesson-title">Lesson 2</div>
+                            <div class="lesson-description">Personal Information</div>
+                        </div>
+                        <div class="lessonU1" onclick="window.location.href = 'Lessons/3_LessonThree/lessonThree.html'">
+
+                            <div class="lesson-title">Lesson 3</div>
+                            <div class="lesson-description">Routines are important!</div>
+                        </div>
+                        <div class="lessonU1" onclick="window.location.href = 'Lessons/4_LessonFour/lessonFour.html'">
+
+                            <div class="lesson-title">Lesson 4</div>
+                            <div class="lesson-description">Food and Drinks I</div>
+                        </div>
+                        <div class="lessonU1" onclick="window.location.href = 'Lessons/5_LessonFive/lessonFive.html'">
+
+                            <div class="lesson-title">Lesson 5</div>
+                            <div class="lesson-description">Fashion and clothing</div>
+                        </div>
+                        <div class="lessonU1" onclick="window.location.href = 'Lessons/6_LessonSix/lessonSix.html'">
+
+                            <div class="lesson-title">Lesson 6</div>
+                            <div class="lesson-description">Unit Review</div>
+                        </div>
+                    </div>
+                    <h3 class="titleunit">Unit Two</h3>
+                    <div class="unit">
+
+                        <div class="lessonU2" onclick="window.location.href = 'Lessons/7_LessonSeven/lessonSeven.html'">
+
+                            <div class="lesson-title">Lesson 7</div>
+                            <div class="lesson-description">Places and Directions</div>
+                        </div>
+                        <div class="lessonU2" onclick="window.location.href = 'Lessons/8_LessonEight/lessonEight.html'">
+
+                            <div class="lesson-title">Lesson 8</div>
+                            <div class="lesson-description">Numbers and time</div>
+                        </div>
+                        <div class="lessonU2" onclick="window.location.href = 'Lessons/9_LessonNine/lessonNine.html'">
+
+                            <div class="lesson-title">Lesson 9</div>
+                            <div class="lesson-description">Describing people</div>
+                        </div>
+                        <div class="lessonU2" onclick="window.location.href = 'Lessons/10_LessonTen/lessonTen.html'">
+
+                            <div class="lesson-title">Lesson 10</div>
+                            <div class="lesson-description">Hobbies and activities</div>
+                        </div>
+                        <div class="lessonU2" onclick="window.location.href = 'Lessons/11_LessonEleven/lessonEleven.html'">
+
+                            <div class="lesson-title">Lesson 11</div>
+                            <div class="lesson-description">Travel and transportation</div>
+                        </div>
+                        <div class="lessonU2" onclick="window.location.href = 'Lessons/12_LessonTwelve/lessonTwelve.html'">
+
+                            <div class="lesson-title">Lesson 12</div>
+                            <div class="lesson-description">Unit Review</div>
+                        </div>
+                    </div>
+                    <h3 class="titleunit">Unit Three</h3>
+                    <div class="unit">
+
+                        <div class="lessonU3" onclick="window.location.href = 'Lessons/13_LessonThirteen/lessonThirteen.html'">
+
+                            <div class="lesson-title">Lesson 13</div>
+                            <div class="lesson-description">Health and feelings</div>
+                        </div>
+                        <div class="lessonU3" onclick="window.location.href = 'Lessons/14_LessonFourteen/lessonFourteen.html'">
+
+                            <div class="lesson-title">Lesson 14</div>
+                            <div class="lesson-description">Shopping and money</div>
+                        </div>
+                        <div class="lessonU3" onclick="window.location.href = 'Lessons/15_LessonFifteen/lessonFifteen.html'">
+
+                            <div class="lesson-title">Lesson 15</div>
+                            <div class="lesson-description">Everything is possible</div>
+                        </div>
+                        <div class="lessonU3" onclick="window.location.href = 'Lessons/16_LessonSixteen/lessonSixteen.html'">
+
+                            <div class="lesson-title">Lesson 16</div>
+                            <div class="lesson-description">Whose lesson is that?</div>
+                        </div>
+                        <div class="lessonU3" onclick="window.location.href = 'Lessons/17_LessonSeventeen/lessonSeventeen.html'">
+
+                            <div class="lesson-title">Lesson 17</div>
+                            <div class="lesson-description">Fortune Teller for a day</div>
+                        </div>
+                        <div class="lessonU3" onclick="window.location.href = 'Lessons/18_LessonEighteen/lessonEighteen.html'">
+
+                            <div class="lesson-title">Lesson 18</div>
+                            <div class="lesson-description">Unit Review</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="mainContent-Practice" class="mainContent" style="display: none;">
+            <div id="PracticeModules">
+                <div class="LessonsOption" id="PracticeOptionA1A2" onclick="openPracticeA1A2()">
+                    <h4>A1A2 MODULE</h4>
+                </div>
+                <div class="LessonsOption" id="PracticeOptionB1">
+                    <h4>B1 MODULE</h4>
+                    <p>Coming Soon...</p>
+                </div>
+                <div class="LessonsOption" id="PracticeOptionB2">
+                    <h4>B2 MODULE</h4>
+                    <p>Coming Soon...</p>
+                </div>
+            </div>
+            <div id="A1A2PracticeContainer" style="display: none;">
+                <div id="A1A2PracticeHeader">
+                    <button id="A1A2goBack" onclick="gobacktoPractice()"><i
+                            class="fa-solid fa-angles-left"></i></button>
+                    <h3>A1A2 Module - Written Practice</h3>
+                </div>
+                <div id="actContainer">
+                    <div id="actUniOne">
+                        <div id="actLesson1" class="actlesson1">
+                            <div class="actDesc">
+                                <h3>1 - Lesson One</h3>
+                                <p>Verb to Be, Articles</p>
+                            </div>
+                            <div class="actOpt">
+                                <button class="actDownload"
+                                    onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/A1A2%2FWP-A1A2L1.pdf?alt=media&token=cf39453c-5761-4265-972e-ed355d5503a0', '_blank')"><i
+                                        class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div id="actLesson2" class="actlesson1">
+                            <div class="actDesc">
+                                <h3>2 - Lesson Two</h3>
+                                <p>Possessives, prepositions</p>
+                            </div>
+                            <div class="actOpt">
+                                <button class="actDownload"
+                                    onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/A1A2%2FWP-A1A2L2.pdf?alt=media&token=dd6ccaaa-b951-4161-a2ee-879c05cb1409', '_blank')"><i
+                                        class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div id="actLesson3" class="actlesson1">
+                            <div class="actDesc">
+                                <h3>3 - Lesson Three</h3>
+                                <p>Routine</p>
+                            </div>
+                            <div class="actOpt">
+                                <button class="actDownload"
+                                    onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/A1A2%2FWP-A1A2L3.pdf?alt=media&token=7befedbc-9e75-4a6f-a3ff-6c23fea70fbc', '_blank')"><i
+                                        class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div id="actLesson4" class="actlesson1">
+                            <div class="actDesc">
+                                <h3>4 - Lesson Four</h3>
+                                <p>Food and drinks, third person rule</p>
+                            </div>
+                            <div class="actOpt">
+                                <button class="actDownload"
+                                    onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/A1A2%2FWP-A1A2L4.pdf?alt=media&token=3b826a5f-ee2d-4c5a-8555-375cc5b6ac4a', '_blank')"><i
+                                        class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+                        <div id="actLesson4" class="actlesson1">
+                            <div class="actDesc">
+                                <h3>5 - Lesson Five</h3>
+                                <p>Clothing</p>
+                            </div>
+                            <div class="actOpt">
+                                <button class="actDownload"
+                                    onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/A1A2%2FWP-A1A2L5.pdf?alt=media&token=c3a1b6de-2e75-4693-89d0-2307c5b3370e', '_blank')"><i
+                                        class="fa-solid fa-download"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="mainContent-Documents" class="mainContent" style="display: none;">
+            <h3 id="documents-Header">PDFs</h3>
+            <ul id="document-Horizon" class="Documents collapsible">Horizon English Group
+                <li id="doc1" onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/DOCUMENTS%2FBEYOND_THE_HORIZON.pdf?alt=media&token=6afb724e-ef24-4075-a631-53ffb3871cc2', '_blank')">&nbsp;<i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;Beyond the Horizon</li>
+                <li id="doc2" onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/DOCUMENTS%2FGUIDELINES.pdf?alt=media&token=87836a6d-0164-48b7-879e-096aef5fa87a', '_blank')">&nbsp;<i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;Guidelines</li>
+                <li id="doc3" onclick="window.open('https://www.canva.com/design/DAGKGs5rKsE/Ji9OS5bIZ3Nu9Nm0SMjSLQ/view?utm_content=DAGKGs5rKsE&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink&mode=preview', '_blank')">&nbsp;<i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;Modelo de Contrato</li>
+            </ul>
+            <ul id="document-LessonPlans" class="Documents collapsible">Support Material
+                <li id="grammar-1" onclick="window.open('https://firebasestorage.googleapis.com/v0/b/horizon-db7c1.appspot.com/o/DOCUMENTS%2FGRAMMAR_POINTS.pdf?alt=media&token=070e08bb-7637-4061-828f-510ad6bdc1c4', '_blank')">&nbsp;<i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;Grammar Points</li>
+            </ul>
+            <ul id="document-Extra" class="Documents collapsible" style="display: none;">Conversation Classes
+                <li id="fin-1" onclick="docTest()">&nbsp;<i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;Class 1</li>
+            </ul>
+            <ul id="document-Finantial" class="Documents collapsible" style="display: none;">Financial
+                <li id="fin-1" onclick="docTest()">&nbsp;<i class="fa-solid fa-file-pdf"></i>&nbsp;&nbsp;&nbsp;Money 1</li>
+            </ul>
+            
+
+        </div>
+    </main>
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="dataForm">
+                <div id="formTitle">
+                    <h2>New Student:</h2>
+                </div>
+                <label for="name">Name:</label>
+                <input type="text" id="name" placeholder="Nome" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" placeholder="Email" required>
+                <label for="linkMeet">Meet / Zoom link:</label>
+                <input type="text" id="callLink" placeholder="Meet / Zoom link" required>
+                <div>
+                    <label for="course">Module:</label>
+                    <select id="course" placeholder="Módulo" required>
+                        <option value="A1A2">A1-A2</option>
+                        <option value="B1">B1</option>
+                        <option value="Conversation">Conversation</option>
+                    </select>
+                    <label for="pricehour">Hour Price:</label>
+                    <input type="number" id="pricehour" placeholder="Hora/Aula" required>
+                    <label for="mhours">Month total:</label>
+                    <input type="number" id="mhours" placeholder="Aulas no mês" required>
+                </div>
+                <button type="submit" id="bttnsubmit">Salvar</button>
+            </form>
+        </div>
+    </div>
+    <script src="src/script.js"></script>
+</body>
+
+</html>

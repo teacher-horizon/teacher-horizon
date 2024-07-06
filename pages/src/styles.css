@@ -1,0 +1,832 @@
+:root{
+    --Hblue: #0a3153;
+    --Hred: #9e2a2b;
+    --Hbg: #eaeaea;
+    --Hshadow: #d0d0d0;
+}
+body{
+    background-color: var(--Hbg);
+    margin: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+#documents-Header{
+    width: 100%;
+    height: 80px;
+    color: white;
+    text-align: center;
+    justify-content: center;
+    font-size: x-large;
+    background-color: var(--Hred);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+}
+li {
+    margin: 10px 0; 
+    padding: 10px; 
+    padding-left: 2%;
+    margin-left: 2%;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    background-color: #ffffff;
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    transition: background-color 0.3s;
+}
+
+li:hover {
+    background-color: #e0e0e0; /* Background color on hover */
+}
+.Documents {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    margin: 18px;
+    list-style-type: none; /* Remove default bullets */
+    font-size: x-large;
+    color: var(--Hblue);
+    width: 95%;
+    border-bottom: 1px solid lightgrey;
+}
+
+.Documents > li {
+    display: none;
+    margin: 10px 0;
+    padding: 10px;
+    font-size: medium;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.Documents > li:hover {
+    background-color: #e0e0e0;
+}
+
+.Documents.collapsible::before {
+    content: '\f138'; /* Font Awesome down arrow */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-right: 10px;
+}
+
+.Documents.collapsible.expanded::before {
+    content: '\f13a'; /* Font Awesome up arrow */
+}
+
+.Documents.collapsible.expanded > li {
+    display: block;
+}
+aside{
+    position: fixed;
+    margin-top: 0;
+    display: flex;
+    flex-flow: column;
+    background-color: var(--Hblue);
+    width: 270px;
+    height: 100dvh;
+    align-items: center;
+    z-index: 10;
+}
+#asideLogo{
+    width: 80%;
+    height: fit-content;
+    align-self: top;
+    margin-top: 10%;
+}
+#teacherDash{
+    width: 80%;
+    height: 6dvh;
+    margin: 32px;
+    display: flex;
+    background-color: white;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#teacherDash p{
+    color: var(--Hblue);
+    padding: 2%;
+    font-size: medium;
+    font-weight: 600;
+}
+#buttonsContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.sidebarButton{
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    padding: 6%;
+}
+.sidebarButton:hover{
+    background-color: var(--Hbg);
+    color: var(--Hblue);
+}
+.selected{
+    background-color: var(--Hbg);
+    color: var(--Hblue);
+}
+main{
+    position: absolute;
+    margin-left: 270px;
+    display: flex;
+    width: calc(100% - 273px);
+}
+.mainContent{
+    width: 100%;
+    padding: 2%;
+    
+}
+/*STUDENTS - MAIN*/
+#mainContent-Students{
+    display: flex;
+    flex-direction: row;
+    
+}
+#studentDetails{
+    width: 480px; 
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background-color: var(--Hbg);
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1); 
+    transition: right 0.3s ease; 
+    z-index: 1001; 
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+#studentRecordDetails{
+    width: 480px; 
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    background-color: var(--Hbg);
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.1); 
+    transition: right 0.3s ease; 
+    z-index: 1001; 
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+}
+#RecordDetails-SaveButton{
+    width: 80%;
+    height: 48px;
+    margin-top: 24px;
+    border: none;
+    background-color: #3267ac;
+    color: white;
+    font-size: x-large;
+    font-weight: 600;
+    border-radius: 8px;
+}
+#RecordDetails-SaveButton:hover{
+    background-color: white;
+    border: 2px solid #3267ac;
+    color: #3267ac;
+    cursor: pointer;
+}
+#studentDetails label, #studentRecordDetails label{
+    padding-left: 3%;
+    color: grey;
+    left: 0;
+    width: 90%;
+}
+#studentDetails h4, #studentRecordDetails h4{
+    justify-self: center;
+    align-self: center;
+    padding: 4%;
+    font-size: larger;
+    color: var(--Hblue);
+    width: 80%;
+    text-align: center;
+    border-bottom: 1px solid lightgrey;
+}
+.Details-PopUp{
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    width: 85%;
+    display: flex;
+    margin: 12px;
+    margin-bottom: 18px;
+    height: 40px;
+    text-align: left;
+    align-items: center;
+    justify-content: start;
+    padding-left: 3%;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    
+}
+#Detail-Numbers{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 90%;
+}
+#closeDetails, #closeRecordDetails{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    font-size: xx-large;
+    width: 40px;
+    height: 40px;
+    background-color: transparent;
+}
+#closeDetails:hover, #closeRecordDetails:hover{
+    cursor: pointer;
+}
+#RecordDetails-DateArea{
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 32px;
+    background-color: white;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    border-radius: 8px;
+}
+#RecordDetails-DateArea p{
+    color: grey;
+}
+#RecordDetails-Date{
+    width: 40%;
+    height: 32px;
+    text-align: center;
+    font-size: x-large;
+    border-radius: 8px;
+    outline: none;
+    border: 1px solid grey;
+    color: grey;
+}
+.stdDetails{
+    width: 40%;
+    margin-right: 16px;
+    border: 1px solid white;
+    height: 32px;
+    border-radius: 4px;
+    color: var(--Hblue);
+    font-weight: 600;
+    box-shadow:  2px 2px 4px #d0d0d0;
+}
+.stdDetails:hover{
+    background-color: white;
+    border: 1px solid var(--Hblue);
+    cursor: pointer;
+}
+#itemStudentsContainer{
+    display: flex;
+    flex-direction: column;
+    
+}
+#studentsHeader{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1%;
+    padding-left: 4%;
+    padding-right: 4%;
+    border-radius: 16px;
+    margin-bottom: 24px;
+    background-color: var(--Hred);
+    box-shadow:  5px 5px 9px #d0d0d0;
+}
+#studentsButtons{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+.studentButton{
+    height: 50px;
+    width: 130px;
+    align-items: center;
+    border: none;
+    background-color: var(--Hred);
+    border: 2px solid white;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+}
+#studentsHeader h3{
+    color: white;
+    font-size: x-large;
+}
+
+.studentButton:hover{
+    background-color: white;
+    color: var(--Hred);
+    font-weight: 600;
+    cursor: pointer;
+}
+#studentsTable{
+    background-color: white;
+    width: 100%;
+    padding: 2%;
+    border-radius: 16px;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    text-align: left;
+}
+#studentsTable th{
+    height: 50px;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+#studentsTable tr{
+    align-items: center;
+    justify-content: center;
+    
+}
+#studentsTable td{
+    height: 40px;
+    padding-left: 2%;
+    text-align: left;
+}
+.modal {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 1000; 
+    display: none;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal-content {
+    display: flex;
+    width: 50%;
+    height: 60%;
+    position: absolute;
+    background-color: #fefefe;
+    padding: 20px;
+    border: 1px solid #888;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+}
+
+#dataForm {
+    display: flex;
+    flex-direction: column;
+}
+
+#dataForm input {
+    margin: 2%;
+    height: 4dvh;
+    margin-bottom: 10px;
+}
+#dataForm div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+#course{
+    width: 20%;
+    height: 5dvh;
+    margin: 2%;;
+    
+}
+#dataForm div input{
+    width: 18%;
+}
+#bttnsubmit{
+    margin: 2%;
+    height: 6dvh;
+    font-size: large;
+    font-weight: 600;
+    border-radius: 24px;
+    border: none;
+    color: white;
+    background-color: #3267ac;
+}
+#bttnsubmit:hover{
+    cursor: pointer;
+    background-color: #3270c0;
+}
+/* RECORDS */
+.stdHeader{
+    background-color: var(--Hred);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px;
+    gap: 16px;
+    margin-bottom: 32px;
+    border-radius: 16px;
+}
+#searchInput{
+    width: 50%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+    
+}
+#searchInput:focus{
+    outline: none;
+}
+#searchInput::placeholder {
+    margin-left: 8px;
+    color: #999; 
+    font-size: 14px; 
+    font-family: Arial, sans-serif; 
+    padding-left: 8px;
+}
+#monthFilter{
+    width: 20%;
+    height: 40px;
+    border: none;
+    border-radius: 8px;
+}
+#monthFilter option{
+    background-color: #fff;
+    color: #333;
+    border: none;
+    font-size: 14px;
+}
+.recordsbutton{
+    border: none;
+    background-color: #eaeaea;
+    color: black;
+    height: 32px;
+    width: 56px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+#deleteButton:hover{
+    background-color: rgb(235, 60, 60);
+    color: white;
+}
+#editButton:hover{
+    background-color: #3270c0;
+    color: white;
+}
+.itemTitle{
+    color: white;
+    font-size: x-large;
+}
+#recordsTable{
+    background-color: white;
+    width: 100%;
+    padding: 2%;
+    border-radius: 16px;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    text-align: left;
+}
+.recordsTH{
+    width: 21%;
+}
+#recordsTable th{
+    padding: 8px;
+    align-items: center;
+}
+#recordsTable td{
+    height: 40px;
+    padding-left: 2%;
+    text-align: left;
+}
+#recordsTable td{
+    border-bottom: 1px solid lightgray;
+}
+/* LESSONS */
+.LessonsOption{
+    margin: 32px;
+    height: 60px;
+    border-radius: 16px;
+    padding: 2%;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#LessonsOptionA1A2:hover, #PracticeOptionA1A2:hover{
+    cursor: pointer;
+    scale: 1.01;
+}
+.LessonsOption h4{
+    color: var(--Hblue);
+}
+.LessonsOption p{
+    color: grey;
+}
+#LessonsOptionB1, #LessonsOptionB2{
+    background-color: rgb(240, 240, 240);
+}
+#A1A2Header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+#A1A2Header h3{
+    color: white;
+    width: 100%;
+    margin-left: 60px;
+    margin-bottom: 32px;
+    background-color: var(--Hred);
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow:  5px 5px 9px #d0d0d0;
+}
+#A1A2goBack{
+    position: absolute;
+    left: 2%;
+    border: none;
+    background-color: white;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-weight: 600;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-size: larger;
+}
+#LessonsOptionA1A2, #PracticeOptionA1A2{
+    background: linear-gradient(90deg, white 97%, var(--Hred) 97%);
+    
+}
+#A1A2goBack, #PracticeOptionA1A2:hover{
+    cursor: pointer;
+    background-color: var(--Hblue);
+    color: white;
+}
+#A1A2LessonContainer{
+    background-color: white;
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 16px;
+}
+.grid {
+    display: grid;
+    grid-template-rows: auto;
+    gap: 10px;
+    padding: 15px;
+}
+.unit {
+    margin-top: 0;
+    margin-bottom: 80px;
+    display: flex;
+    height: 19vh;
+    gap: 16px;
+}
+.lessonU1, .lessonU2, .lessonU3 {
+    min-width: 130px;
+    height: 21vh;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column; 
+    justify-content: space-between;
+    transition: transform 0.3s ease-in-out;
+    box-shadow:  5px 5px 9px #d0d0d0;
+             
+}
+.lessonU1{
+    background: linear-gradient(to bottom, #335c67  45%, white 40%);
+    margin-bottom: 40px;
+}
+.lessonU2{
+    background: linear-gradient(to bottom, rgb(153, 194, 134)  45%, white 40%);
+    margin-bottom: 40px;
+}
+.lessonU3{
+    background: linear-gradient(to bottom, #e26d5c  45%, white 40%);
+    margin-bottom: 40px;
+}
+.lessonU1:hover{ 
+        background-color: white;  
+        scale: 1.1;
+        cursor: pointer;
+}
+.lessonU2:hover{ 
+    background-color: white;  
+    scale: 1.1;
+    cursor: pointer;
+}
+.lessonU3:hover{ 
+    background-color: white;  
+    scale: 1.1;
+    cursor: pointer;
+}
+.lesson-title {
+    color: white;
+    font-weight: bold;
+    margin-top: 2vh;
+    margin-bottom: 5px;
+    align-self: center;
+    transition: transform 0.3s ease-in-out;
+
+}
+.lesson-description {
+    color: black;
+    transition: transform 0.3s ease-in-out;
+    opacity: 0.8;
+    font-size: 16px;
+    padding: 4px;
+}
+.titleunit{
+    color: var(--Hblue);
+    margin-bottom: 40px;
+    width: 100%;
+    border-bottom: 1px solid lightgrey;
+
+}
+
+/* PRACTICE */
+#A1A2PracticeHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    margin-bottom: 32px;
+}
+#A1A2PracticeHeader h3{
+    color: white;
+    width: 100%;
+    margin-left: 60px;
+    background-color: var(--Hred);
+    height: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow:  5px 5px 9px #d0d0d0;
+}
+.actlesson1{
+    background-color: rgb(252, 252, 252);
+    border-radius: 16px;
+    box-shadow:  5px 5px 9px #d0d0d0;
+    padding: 1%;
+    margin-bottom: 16px;
+    background: linear-gradient(90deg, rgba(51,92,103,1) 2%, rgba(255,255,255,1) 2%);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.actlesson1 h3{
+    color: #0a3153;
+    margin-left: 32px;
+}
+.actlesson1 p{
+    color: grey;
+    margin-left: 32px;
+}
+.actOpt{
+    align-items: center;
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.actDownload{
+    margin: 8px;
+    height: 70%;
+    width: 80%;
+    border: none;
+    border-radius: 12px;
+    font-size: x-large;   
+    color: #0a3153;
+}
+.actDownload:hover{
+    cursor: pointer;
+    background-color: white;
+    border: 2px solid #9e2a2b;
+    color: #9e2a2b;
+}
+#obsAct{
+    background-color: rgb(107, 223, 107);
+    color: white;
+    height: 8dvh;
+    display: flex;
+    padding-left: 2%;
+    align-items: center;
+    border-radius: 12px;
+}
+
+
+
+#popupContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Darker semi-transparent background */
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#attendancePopup {
+    background-color: white;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+#attendancePopup h2 {
+    margin-top: 0;
+}
+
+#attendancePopup label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#attendancePopup input[type="date"],
+#attendancePopup input[type="text"],
+#attendancePopup textarea {
+    width: calc(100% - 12px);
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#attendancePopup textarea {
+    resize: vertical;
+}
+
+#submitAttendance {
+    display: block;
+    width: 100%;
+    padding: 8px 0;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#submitAttendance:hover {
+    background-color: #0056b3;
+}
+#closePopup{
+    position: absolute;
+    margin-left: 280px;
+    border: none;
+    background-color: transparent;
+    font-size: x-large;
+    color: lightgray;
+}
+#closePopup:hover{
+    color: black;
+    cursor: pointer;
+}
+
+@media only screen
+and (min-width: 375px)
+and (max-width: 667px)
+and (-webkit-min-device-pixel-ratio: 2)
+and (orientation: portrait){
+    
+    body{
+        display: none;
+    }
+}
